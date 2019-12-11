@@ -40,4 +40,24 @@ Reactive Streams 미지원|Observable|Observer|Disposable
   ## 1.6.1 RxJava 의 기본 구성  
     소비자(Subscriber/Observer)가 생산자(Flowable/Observable)를 구독하는 형태  
     RxJava 1.x: Observable - Observer - Disposable  
-    RxJava 2.x: Flowable - Subscriber - Subscription  
+    RxJava 2.x: Flowable - Subscriber - Subscription
+    FlowableProcessor 클래스 다이어그램  
+  ## 1.6.2 Flowable/Observable
+    통지 규칙  
+      1. null 통지 X  
+      2. 데이터 통지는 해도 되고 안해도 된다. ?  
+      3. Flowable/Observable 의 처리를 끝낼 때는 완료나 에러 통지를 해야 하며, 둘 다 통지하지 않는다. ?  
+      4. 완료나 에러 통지를 한 뒤에는 다른 통지를 해서는 안 된다.  
+      5. 통지할 때는 1건씩 순차적으로 통지하며, 동시에 통지하면 안된다. ?  
+        어떻게 동기화를 구현할까 ? -> onNext 동기화? onNext 호출을 동기화?
+    Subscriber/Observer  
+      호출 순서: onSubscribe -> onNext -> onComplete  
+      데이터가 통지될 때마다 onNext 를 호출  
+      ?: 데이터 통지란 생산자가 소비자에게 onNext 호출하는게 통지 아냐?  
+      안전한 통지를 하는 Flowable에서 데이터 받는 동안 onNext 는 동시에 실행되지 않는다. (호출하는 부분 동기화)  
+      각 메서드는 하나씩 순서대로 실행되지만 onSubscribe 는 예외  
+    Subscription  
+    Disposable  
+    FlowableProcessor/Subject  
+    DisposableSubscriber/DisposableObserver: Disposable 과 Subscriber 두 기능을 다 가지고 있음  
+    ... 여러 종류의 구현체가 있구나..........  
