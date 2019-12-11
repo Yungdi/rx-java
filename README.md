@@ -24,6 +24,7 @@ Reactive Streams 미지원|Observable|Observer|Disposable
               통지한 데이터 캐시, 처리 시작한 뒤 구독하면 캐시 데이터 먼저 새로 구독한 소비자에게 통지  
     share(): 여러 소비자가 구독할 수 있는 Flowable 생성 (ConnectableFlowable X) = flowable.publish().refCount()  
 # 1.4 마블 다이어그램  
+  시간 경과에 따른 데이터 변화 시각화  
 # 1.5 RxJava 예제  
   ## 1.5.1 환경 구축  
   ## 1.5.2 Flowable 사용 예제  
