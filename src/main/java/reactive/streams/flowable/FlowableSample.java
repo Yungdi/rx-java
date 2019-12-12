@@ -24,6 +24,7 @@ public class FlowableSample {
                             emitter.onNext(datum);
                         }
                         emitter.onComplete();
+
                     }
                 }, BackpressureStrategy.BUFFER);
         // 숨겨진 부분: onSubscribe(new Subscription), 배압?, 예외는 상속 X?, 예외 발생 시 onError 호출은? emitter.onError(throwable)
@@ -42,8 +43,10 @@ public class FlowableSample {
                     public void onNext(String data) {
                         String threadName = Thread.currentThread().getName();
                         System.out.println(threadName + ": " + data);
+
                         if (new Random().nextInt(10) % 2 == 0)
                             throw new RuntimeException();
+
                         this.subscription.request(1L);
                     }
 

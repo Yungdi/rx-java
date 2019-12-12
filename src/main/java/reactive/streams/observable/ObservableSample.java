@@ -24,6 +24,7 @@ public class ObservableSample {
         observable
                 .observeOn(Schedulers.computation())
                 .subscribe(new Observer<String>() {
+
                     @Override
                     public void onSubscribe(Disposable d) {
                         //??? do nothing
